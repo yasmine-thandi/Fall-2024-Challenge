@@ -18,6 +18,43 @@ def extract_text_from_pdf(file_content):
         text += page.extract_text()
     return text
 
+# Function to Split Text into Manageable Chunks
+def split_text_into_chunks(text, chunk_size=1000):
+    """Splits the text into chunks that are no longer than the specified chunk_size."""
+    words = text.split()
+    chunks = []
+    current_chunk = []
+    
+    for word in words:
+        current_chunk.append(word)
+        if len(" ".join(current_chunk)) > chunk_size:
+            chunks.append(" ".join(current_chunk[:-1]))  # Add the chunk and discard the last word
+            current_chunk = [word]  # Start a new chunk with the last word
+    
+    if current_chunk:  # Add any remaining words as the last chunk
+        chunks.append(" ".join(current_chunk))
+    
+    return chunks
+
+# Function to Summarize Each Chunk
+def summarize_chunk(chunk):
+    inputs_summary = bart_tokenizer(chunk, return_tensors="pt", max_length=1024, truncation=True)
+    summary_ids = bart_model.generate(
+        inputs_summary["input_ids"],
+        max_length=50,
+        min_length=20,
+        num_beams=4,
+        early_stopping=True
+    )
+    summary = bart_tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+    return summary
+
+# Summarize the Entire PDF by Summarizing Each Chunk
+def summarize_text(text):
+    chunks = split_text_into_chunks(text, chunk_size=1000)
+    summaries = [summarize_chunk(chunk) for chunk in chunks]
+    return " ".join(summaries)
+
 # Function to Read Text from a File (local or URL)
 def read_file(file_path):
     """Reads text from a local file or URL."""
@@ -52,67 +89,6 @@ def read_file(file_path):
     else:
         return "Error: File not found."
 
-def summarize_text(text):
-    # Refined instruction for brevity and main idea extraction
-    prompt_summary = f"Summarize the following text in 2-3 concise sentences, removing unnecessary details: \n\n{text}"
-
-    # Tokenize the prompt text for summary
-    inputs_summary = bart_tokenizer(prompt_summary, return_tensors="pt", max_length=1024, truncation=True)
-
-    # Generate the summary with updated length constraints
-    summary_ids = bart_model.generate(
-        inputs_summary["input_ids"],
-        max_length=50,  # Adjust the max length to a reasonable value
-        min_length=20,  # Ensure it's not too long
-        num_beams=4,
-        early_stopping=True
-    )
-
-    # Decode and clean the output (remove prompt)
-    summary = bart_tokenizer.decode(summary_ids[0], skip_special_tokens=True)
-    summary = summary.replace(prompt_summary, "").strip()  # Remove the prompt from the response
-
-    # Post-process to trim to 2-3 sentences
-    summary = " ".join(summary.split()[:30])  # Limit to 30 words (approx. 2-3 sentences)
-
-    # Now, extract the main idea from the same text
-    prompt_main_idea = f"Extract the main idea of the following story in 1-2 sentences: \n\n{text}"
-
-    # Tokenize the prompt for main idea
-    inputs_main_idea = bart_tokenizer(prompt_main_idea, return_tensors="pt", max_length=1024, truncation=True)
-
-    # Generate the main idea
-    main_idea_ids = bart_model.generate(
-        inputs_main_idea["input_ids"],
-        max_length=30,  # Short main idea
-        num_beams=4,
-        early_stopping=True
-    )
-
-    # Decode and clean the main idea output
-    main_idea = bart_tokenizer.decode(main_idea_ids[0], skip_special_tokens=True)
-    main_idea = main_idea.replace(prompt_main_idea, "").strip()  # Remove the prompt from the response
-
-    return summary.strip(), main_idea.strip()
-
-# Function to split text into manageable chunks (to fit model input size)
-def split_text_into_chunks(text, chunk_size=1000):
-    """Splits the text into chunks that are no longer than the specified chunk_size."""
-    words = text.split()
-    chunks = []
-    current_chunk = []
-    
-    for word in words:
-        current_chunk.append(word)
-        if len(" ".join(current_chunk)) > chunk_size:
-            chunks.append(" ".join(current_chunk[:-1]))  # Add the chunk and discard the last word
-            current_chunk = [word]  # Start a new chunk with the last word
-    
-    if current_chunk:  # Add any remaining words as the last chunk
-        chunks.append(" ".join(current_chunk))
-    
-    return chunks
-
 # Main Function to Handle User Input
 def main():
     while True:
@@ -144,18 +120,9 @@ def main():
         
         if action == '1':
             # Summarize the user input using BART
-            summary, main_idea = summarize_text(training_data_text)
+            summary = summarize_text(training_data_text)
             print("\nSummary:")
             print(summary)
-            print("\nMain Idea:")
-            print(main_idea)
-        
-        elif action == '2':
-            # Ask a question and get an answer based on the training data using GPT-Neo
-            question = input("Please enter your question about the training data: ")
-            answer = answer_question_from_chunks(training_data_text, question)
-            print("\nAnswer:")
-            print(answer)
         
         else:
             print("Invalid choice. Please restart the program and choose 1 or 2.")
