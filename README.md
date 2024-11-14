@@ -1,7 +1,5 @@
 # Fall-2024-Challenge
 
-Practice Training PDF: https://www.torontomu.ca/sciencerendezvous/SR2021/A_Brief_Introduction_To_AI.pdf
-
 TECH STUFF FOR FALL 2024 CHALLENGE:
 
 Next Steps:
@@ -26,6 +24,8 @@ Future:
 
 *Note*
 - Another tech meetup this Sunday
+
+Practice Training PDF: https://www.torontomu.ca/sciencerendezvous/SR2021/A_Brief_Introduction_To_AI.pdf
 
 Training materials:
 
