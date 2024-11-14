@@ -2,17 +2,33 @@
 
 Practice Training PDF: https://www.torontomu.ca/sciencerendezvous/SR2021/A_Brief_Introduction_To_AI.pdf
 
+TECH STUFF FOR FALL 2024 CHALLENGE:
+
 Next Steps:
--Fine tune Q&A model by adding more prompts
 
--Combine code
+- Fix UI (would like to use Gradio --> the upload file isn't working)
+- Our backup is Streamlit (ask GPT how to make loading times faster/more user-friendly)
 
--Add a frontend (streamlit?)
+Friday Meeting:
 
--Find better training materials/data
+- Showcase Streamlit (both functions with file and link upload)
+- Showcase Gradio UI
+- Which UI? (vote)
+- Prompt Engineering with entire team
 
+Future:
+
+- More features (possibly use Notebook LLM? Podcasts, flowcharts?)
+- Gather training data from GPT (the pdf, script and links)
+- Test prototype with training data we made
+- Test prototype with fake urls or spelling errors, also inputting incorrect file types
+- Technical diagram?
+
+*Note*
+- Another tech meetup this Sunday
 
 Training materials:
+
 https://www.mightycall.com/blog/call-center-training/
 
 https://centrical.com/resources/call-center-training/
