@@ -14,6 +14,13 @@ Friday Meeting:
 - Which UI? (vote)
 - Prompt Engineering with entire team
 
+Sunday Meeting
+- prompt engineering
+- feed code the training data we were creating
+- add Notebook LLM feature
+- fix file upload part on Gradio UI
+- make UI nicer? (waiting on wireframe)
+
 Future:
 
 - More features (possibly use Notebook LLM? Podcasts, flowcharts?)
