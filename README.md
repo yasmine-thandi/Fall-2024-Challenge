@@ -20,6 +20,7 @@ Sunday Meeting
 - add Notebook LLM feature
 - fix file upload part on Gradio UI
 - make UI nicer? (waiting on wireframe)
+- RAG pipeline? make it more conversational
 
 Future:
 
