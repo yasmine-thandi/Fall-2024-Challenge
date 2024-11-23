@@ -123,23 +123,24 @@ def text_to_audio(text, filename="podcast.mp3"):
     engine.save_to_file(text, filename)
     engine.runAndWait()
 
-# Function to Create a Flowchart from Text
-def text_to_flowchart(text, max_nodes=8):
-    # Summarize the text to get the key points
+# Function to create a concise flowchart with key sentences
+def create_concise_flowchart(text, max_nodes=5):
+    # Summarize the text first
     summarized_text = summarize_text(text)
-    lines = summarized_text.split(". ")  # Split by sentence or period
-    lines = [line.strip() for line in lines if line.strip()]  # Remove empty lines
-
-    # Limit to max_nodes for a concise flowchart
-    selected_lines = lines[:max_nodes]
-
+    sentences = summarized_text.split(". ")  # Split by sentence
+    sentences = [sentence.strip() for sentence in sentences if sentence.strip()]  # Remove empty lines
+    
+    # Select the top 'max_nodes' most important sentences for the flowchart
+    selected_sentences = sentences[:max_nodes]  # Limit to 5 most important sentences
+    
+    # Create flowchart using Graphviz
     graph = graphviz.Digraph(format='png', engine='dot')
-
-    for i, line in enumerate(selected_lines):
-        graph.node(f'{i}', line)  # Create a node for each line
+    
+    for i, sentence in enumerate(selected_sentences):
+        graph.node(f'{i}', sentence)  # Create a node for each selected sentence
         if i > 0:
             graph.edge(f'{i-1}', f'{i}')  # Link the nodes in sequence
-
+    
     return graph
 
 # Set the page title
@@ -316,7 +317,6 @@ else:
             st.error(f"Failed to fetch the file. Error: {e}")
 
 if text_content:
-   ## st.text_area("Extracted Content", text_content[:2000], height=200)
     task = st.radio("Select a task:", ["Q&A", "Summarization", "Generate Podcast", "Create Flowchart"])
 
     if task == "Q&A":
@@ -325,17 +325,17 @@ if text_content:
             answer = answer_question_from_chunks(text_content, question)
             st.write("Answer:", answer)
     elif task == "Summarization":
+        # Summarize the full document text
         summary = summarize_text(text_content)
         st.write("Summary:", summary)
     elif task == "Generate Podcast":
         podcast_filename = "podcast.mp3"
-        summarized_text = summarize_text(text_content)  # Use summarized text
-        text_to_audio(text_content, podcast_filename)
+        summarized_text = summarize_text(text_content)  # Use summarized text for podcast
+        text_to_audio(summarized_text, podcast_filename)  # Convert the summarized text to audio
         with open(podcast_filename, "rb") as file:
             st.audio(file.read(), format="audio/mp3")
     elif task == "Create Flowchart":
-        summarized_text = summarize_text(text_content)  # Use summarized text
-        flowchart = text_to_flowchart(summarized_text)
+        flowchart = create_concise_flowchart(text_content)  # Create flowchart with 5 sentences
         st.graphviz_chart(flowchart.source)
 
 # Add a profile picture underneath the "View your community members" subtitle
