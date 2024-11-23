@@ -2,36 +2,19 @@
 
 TECH STUFF FOR FALL 2024 CHALLENGE:
 
-Next Steps:
+Saturday Meeting:
 
-- Fix UI (would like to use Gradio --> the upload file isn't working)
-- Our backup is Streamlit (ask GPT how to make loading times faster/more user-friendly)
-
-Friday Meeting:
-
-- Showcase Streamlit (both functions with file and link upload)
-- Showcase Gradio UI
-- Which UI? (vote)
-- Prompt Engineering with entire team
+- Check to see if link upload feature works on Streamlit
+- Does our solution use GenAI (I know for Q&A and summarization it does, but what about the audio and flowchart features since I didn't use Notebook LLM) --> Ask GPT to help us convert those to use GenAI
+- Are we still doing prompt engineering? (Ask GPT for help)
+- Decide on Demo Training material so can record demo in evening
+- Maybe start in slides?
+- Dhruv mentioned an architecture diagram?
 
 Sunday Meeting
-- prompt engineering
-- feed code the training data we were creating
-- add Notebook LLM feature
-- fix file upload part on Gradio UI
-- make UI nicer? (waiting on wireframe)
-- RAG pipeline? make it more conversational
+- Slides, script and Q&A
 
-Future:
 
-- More features (possibly use Notebook LLM? Podcasts, flowcharts?)
-- Gather training data from GPT (the pdf, script and links)
-- Test prototype with training data we made
-- Test prototype with fake urls or spelling errors, also inputting incorrect file types
-- Technical diagram?
-
-*Note*
-- Another tech meetup this Sunday
 
 Practice Training PDF: https://www.torontomu.ca/sciencerendezvous/SR2021/A_Brief_Introduction_To_AI.pdf
 
