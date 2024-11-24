@@ -10,6 +10,7 @@ import pyttsx3  # Text-to-Speech for podcast generation
 import graphviz  # For flowchart generation
 import faiss  # For efficient similarity search in RAG
 
+
 # Load DistilBERT model for Q&A
 qa_model_name = "distilbert-base-cased-distilled-squad"
 qa_tokenizer = DistilBertTokenizer.from_pretrained(qa_model_name)
@@ -64,6 +65,7 @@ def retrieve_relevant_chunks(query, chunks, top_k=3):
     query_embedding = retrieval_model.encode([query], convert_to_tensor=False)
     distances, indices = index.search(query_embedding, top_k)
     return [chunks[i] for i in indices[0]]
+
 
 # Function to Answer a Question from Chunks of Text
 def answer_question_from_chunks(text, question):
@@ -156,6 +158,8 @@ st.markdown(
         align-items: center;
         padding: 10px 0;
         border-bottom: 2px solid #ddd;
+        position: relative; /* Ensures proper positioning for centering */
+        justify-content: space-between;
     }
     .logo {
         height: 50px;
@@ -165,11 +169,15 @@ st.markdown(
         font-size: 40px;
         font-weight: bold;
         margin: 0;
-        color: blue;
+        color: #006CCB;
+        position: absolute; /* Use absolute positioning to center the title */
+        left: 50%; /* Move the title horizontally to the center */
+        transform: translateX(-50%); /* Adjust for the title's width to center perfectly */
+        top: -10px; /* Moves the title upwards */
     }
     .subtitle {
         font-size: 20px;
-        color: blue;
+        color: #006CCB;
         text-align: left;
         margin-left: 10px;
         margin-top: 15px;
@@ -199,7 +207,7 @@ st.markdown(
     }
     .progress-bar {
         width: 65%;
-        background-color: blue;
+        background-color: #006CCB;
         color: white;
         padding: 5px;
         border-radius: 5px;
@@ -244,21 +252,21 @@ st.markdown(
     
     .continue-learning, .learning-info {
         font-size: 16px;
-        color: blue;
+        color: #006CCB;
         margin-top: 20px;
         text-align: center;
     }
 
         .blue-subtitle {
         font-size: 18px;
-        color: blue;
+        color: #006CCB;
         text-align: center;
         margin-top: 20px;
     }
 
     .footer {
         font-size: 18px;
-        color: blue;
+        color: #006CCB;
         text-align: center;
         margin-top: 30px;
     }
@@ -291,7 +299,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
 
 # Display the main interface options below the header
 file_input_method = st.radio("Choose an input method:", ["Upload a file", "Enter a URL"])
