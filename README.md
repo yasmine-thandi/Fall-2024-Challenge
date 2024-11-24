@@ -2,6 +2,8 @@
 
 TECH STUFF FOR FALL 2024 CHALLENGE:
 
+http://en.copian.ca/library/learning/lleo/call_centre/call_centre_learner/call_centre_learner.pdf
+
 Saturday Meeting:
 
 - Check to see if link upload feature works on Streamlit
