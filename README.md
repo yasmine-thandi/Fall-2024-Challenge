@@ -4,6 +4,8 @@ TECH STUFF FOR FALL 2024 CHALLENGE:
 
 http://en.copian.ca/library/learning/lleo/call_centre/call_centre_learner/call_centre_learner.pdf
 
+"C:\Users\Yasmi\Documents\Fall 2024 Challenge\Training Data (Call Centre Curriculum).pdf"
+
 Saturday Meeting:
 
 - Check to see if link upload feature works on Streamlit
