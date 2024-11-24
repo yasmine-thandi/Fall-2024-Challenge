@@ -4,6 +4,8 @@ TECH STUFF FOR FALL 2024 CHALLENGE:
 
 What is a Customer Service Representative?
 
+What are predictive dialers?
+
 http://en.copian.ca/library/learning/lleo/call_centre/call_centre_learner/call_centre_learner.pdf
 
 "C:\Users\Yasmi\Documents\Fall 2024 Challenge\Training Data (Call Centre Curriculum).pdf"
