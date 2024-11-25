@@ -6,6 +6,8 @@ What is a Customer Service Representative?
 
 What are predictive dialers?
 
+https://docs.google.com/document/d/1zzidt--a9KEynza5kIq3dhxH7eTgNj3yc1KmqIuyYqc/edit?tab=t.0
+
 http://en.copian.ca/library/learning/lleo/call_centre/call_centre_learner/call_centre_learner.pdf
 
 "C:\Users\Yasmi\Documents\Fall 2024 Challenge\Training Data (Call Centre Curriculum).pdf"
